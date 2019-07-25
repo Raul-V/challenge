@@ -9,7 +9,6 @@ app = Flask(__name__)
 
 @app.before_first_request
 def create_database_tables():
-    #create_database(DB_URI)
     db.create_all()
 
 @app.route('/queens', methods = ['GET'])
@@ -19,7 +18,7 @@ def get_n_queens_solutions():
 
     if database_solutions:
         database_solutions = [s.solution.split(',') for s in database_solutions]
-        
+
         return jsonify(database_solutions), 200
 
     queens_solver = BacktrackingNQueensSolver(queens_quantity)
