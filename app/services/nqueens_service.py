@@ -17,8 +17,8 @@ class NQueenService:
     def calculate_solutions(self):
         queens_solver = BacktrackingNQueensSolver(self.n)
         all_solutions = queens_solver.find_all_solutions()
-        if not _find_calculated_solutions(queens_quantity):
-            _save_solutions(solutions)
+        if not self._find_calculated_solutions(queens_quantity):
+            self._save_solutions(solutions)
 
         return all_solutions
 
