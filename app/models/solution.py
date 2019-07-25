@@ -21,4 +21,4 @@ class Solution(db.Model):
 
     @classmethod
     def find_by_n(cls, n):
-        return cls.query.filter_by(n = n)
+        return cls.query.filter_by(n = n).all()
