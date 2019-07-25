@@ -1,4 +1,4 @@
-from models.solution import Solucion
+from models.solution import Solution
 from strategies.backtracking_nqueen import BacktrackingNQueensSolver
 
 class NQueenService:
