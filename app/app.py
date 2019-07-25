@@ -1,8 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from models.solution import Solution
-from strategies.backtracking_nqueen import BacktrackingNQueensSolver
-
+from services.nqueens_service import NQueenService
 app = Flask(__name__)
 
 @app.before_first_request
@@ -17,42 +15,10 @@ def get_n_queens_solutions():
     _queens_quantity_validation(query_parameter)
 
     queens_quantity = int(query_parameter)
+    nqueen_service = NQueenService(queens_quantity)
+    solutions = nqueen_service.calculate_solutions()
 
-    db_solutions = _find_calculated_solutions(queens_quantity)
-    if db_solutions:
-        return jsonify(db_solutions), 200
-
-    return jsonify(_calculate_solutions(queens_quantity)), 200
-
-
-def _queens_quantity_validation(n):
-    if not n.isdigit():
-        raise Exception(f'Parameter n must be an integer number, found {n}')
-
-    queens_quantity = int(n)
-    if queens_quantity < 4:
-        raise Exception(f'Parameter n must greater than 3, found {n}')
-
-
-def _find_calculated_solutions(n):
-    database_solutions = Solution.find_by_n(n)
-    if database_solutions:
-        database_solutions = [s.solution.split(',') for s in database_solutions]
-        transform = []
-        for sol in database_solutions:
-            transform.append([int(digit) for digit in sol])
-        return transform
-    return
-
-
-def _calculate_solutions(n):
-    queens_solver = BacktrackingNQueensSolver(n)
-    all_solutions = queens_solver.find_all_solutions()
-
-    for sol in all_solutions:
-        database_solution = Solution(n, str(sol).strip('[]'))
-        database_solution.save()
-    return all_solutions
+    return jsonify(solutions), 200
 
 
 if __name__ == '__main__':
