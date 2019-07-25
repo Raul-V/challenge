@@ -8,7 +8,7 @@ services:
     environment:      
       - POSTGRES_USER=rvivanco
       - POSTGRES_PASSWORD=pass1234
-      - POSTGRES_DB=chalengedb
+      - POSTGRES_DB=challengedb
     ports:
       - "5432:5432"
   app:
@@ -19,7 +19,7 @@ services:
       - POSTGRES_URL=postgres
       - POSTGRES_USER=rvivanco
       - POSTGRES_PASS=pass1234
-      - POSTGRES_DB=chalengedb
+      - POSTGRES_DB=challengedb
     volumes:      
       - ./app:/app
     depends_on: 
