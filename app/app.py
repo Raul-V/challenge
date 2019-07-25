@@ -16,7 +16,7 @@ def get_env_variable(name):
 
 @app.before_first_request
 def create_database_tables():
-    create_database(DB_URL)
+    create_database(DB_URI)
     db.create_all()
 
 @app.route('/queens', methods = ['GET'])
