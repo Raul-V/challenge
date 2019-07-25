@@ -9,6 +9,7 @@ before_install:
   - docker run -d --name app challenge-flask
 script:
   - docker exec app pytest
-  
+
 after_script:
+- docker logs app
 - docker rm -f app
