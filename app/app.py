@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from services.nqueens_service import NQueenService
+
 app = Flask(__name__)
 
 @app.before_first_request
@@ -20,6 +21,12 @@ def get_n_queens_solutions():
 
     return jsonify(solutions), 200
 
+
+def _queens_quantity_validation(n):
+    if not n.isdigit():
+        raise Exception(f'parameter n must be an integer number, found {n}')
+    if int(n) < 4:
+        raise Exception(f'parameter n must be greater than 3, found {n}')
 
 if __name__ == '__main__':
     from db import db
