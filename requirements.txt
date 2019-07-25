@@ -1,5 +1,4 @@
 flask
 flask_sqlalchemy
-SQLAlchemy-Utils
 psycopg2
 pytest
