@@ -25,5 +25,5 @@ class NQueenService:
 
     def _save_solutions(self, solutions):
         for sol in solutions:
-            s = Solucion(self.n, str(sol).strip('[]'))
+            s = Solution(self.n, str(sol).strip('[]'))
             s.save()
