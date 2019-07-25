@@ -16,11 +16,18 @@ def create_database_tables():
 def get_n_queens_solutions():
     queens_quantity = int(request.args.get('n', 8))
     database_solutions = Solution.find_by_n(queens_quantity)
+
     if database_solutions:
         return database_solutions
+
     queens_solver = BacktrackingNQueensSolver(queens_quantity)
+    all_solutions = queens_solver.find_all_solutions()
+
+    for sol in all_solutions:
+        database_solution = Solution(queens_quantity, str(sol).stripe('[]'))
+        database_solution.save()
     
-    return jsonify(queens_solver.find_all_solutions()), 200
+    return jsonify(all_solutions), 200
 
 if __name__ == '__main__':
     from db import db
