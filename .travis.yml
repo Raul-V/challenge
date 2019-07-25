@@ -5,10 +5,8 @@ services:
   - docker
 
 before_install:
-  - docker build -t flask-demo-app .
+  - pip install docker-compose
+before_script: 
   - docker-compose up -d --force-recreate --build
-
-before_script: pip install docker-compose
-
 script:
-  - pytest
+  - docker exec challenge_app_1 pytest
