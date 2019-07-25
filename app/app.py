@@ -24,7 +24,7 @@ def get_n_queens_solutions():
     all_solutions = queens_solver.find_all_solutions()
 
     for sol in all_solutions:
-        database_solution = Solution(queens_quantity, str(sol).stripe('[]'))
+        database_solution = Solution(queens_quantity, str(sol).strip('[]'))
         database_solution.save()
     
     return jsonify(all_solutions), 200
