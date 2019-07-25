@@ -28,6 +28,7 @@ def get_n_queens_solutions():
 def _queens_quantity_validation(n):
     if not n.isdigit():
         raise Exception(f'Parameter n must be an integer number, found {n}')
+
     queens_quantity = int(n)
     if queens_quantity < 4:
         raise Exception(f'Parameter n must greater than 3, found {n}')
@@ -37,7 +38,7 @@ def _find_calculated_solutions(n):
     database_solutions = Solution.find_by_n(n)
     if database_solutions:
         database_solutions = [s.solution.split(',') for s in database_solutions]
-        return [int(i) for i in database_solutions]
+        return map(int, for s in database_solutions)
     return
 
 
@@ -48,6 +49,7 @@ def _calculate_solutions(n):
     for sol in all_solutions:
         database_solution = Solution(n, str(sol).strip('[]'))
         database_solution.save()
+    return all_solutions
 
 
 if __name__ == '__main__':
