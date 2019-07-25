@@ -6,7 +6,7 @@ services:
 
 before_install:
   - docker build -t flask-demo-app .
-  - docker-compose up -d
+  - docker-compose up -d --force-recreate --build
 
 before_script: pip install docker-compose
 
