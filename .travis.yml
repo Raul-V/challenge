@@ -6,7 +6,7 @@ services:
 
 before_install:
   - docker build -t challenge-flask .
-  - docker run -d --name app challenge-flask
+  - docker run -d --name app challenge-flask -e POSTGRES_URL=postgres -e POSTGRES_USER=rvivanco -e POSTGRES_PASS=pass1234 -e POSTGRES_DB=challengedb
 script:
   - docker exec app pytest
 
