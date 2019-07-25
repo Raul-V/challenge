@@ -2,6 +2,7 @@ from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_utils import create_database
 from models.solution import Solution
+from strategies.backtracking_nqueen import BacktrackingNQueensSolver
 import os
 
 app = Flask(__name__)
@@ -14,9 +15,11 @@ def create_database_tables():
 @app.route('/queens', methods = ['GET'])
 def get_n_queens_solutions():
     queens_quantity = int(request.args.get('n', 8))
-    solution = Solution(4, '[1,2,3,4]')
-    solution.save()
-    return f'how many queens? {queens_quantity}'
+    database_solutions = Solution.find_by_n(queens_quantity)
+    if database_solutions:
+        return database_solutions
+    queens_solver = BacktrackingNQueensSolver(queens_quantity)
+    return queens_solver.find_all_solutions()
 
 if __name__ == '__main__':
     from db import db

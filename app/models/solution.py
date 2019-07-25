@@ -17,3 +17,8 @@ class Solution(db.Model):
     def save(self):
         db.session.add(self)
         db.session.commit()
+
+
+    @classmethod
+    def find_by_n(cls, n):
+        return cls.query.filter_by(n = n)
