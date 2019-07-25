@@ -38,7 +38,7 @@ def _find_calculated_solutions(n):
     database_solutions = Solution.find_by_n(n)
     if database_solutions:
         database_solutions = [s.solution.split(',') for s in database_solutions]
-        return map(int, for s in database_solutions)
+        return map(int, [for s in database_solutions])
     return
 
 
