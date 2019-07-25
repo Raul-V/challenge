@@ -1,6 +1,8 @@
 class BacktrackingNQueensSolver:
     
     def __init__(self, n):
+        if type(n) != int:
+            raise Exception(f'n parameter must be integer, found {type(n)}')
         self._solutions_found = []
         self.n = n
     
