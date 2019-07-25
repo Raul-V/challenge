@@ -5,8 +5,10 @@ services:
   - docker
 
 before_install:
-  - pip install docker-compose
-before_script: 
-  - docker-compose up app -d --force-recreate --build
+  - docker build -t challenge-flask .
+  - docker run -d --name app challenge-flask
 script:
-  - docker exec challenge_app_1 pytest
+  - docker exec app pytest
+  
+after_script:
+- docker rm -f app
