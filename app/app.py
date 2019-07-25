@@ -21,7 +21,7 @@ def get_n_queens_solutions():
     db_solutions = _find_calculated_solutions(queens_quantity)
     if db_solutions:
         return jsonify(db_solutions), 200
-        
+
     return jsonify(_calculate_solutions(queens_quantity)), 200
 
 
@@ -37,7 +37,7 @@ def _find_calculated_solutions(n):
     database_solutions = Solution.find_by_n(n)
     if database_solutions:
         database_solutions = [s.solution.split(',') for s in database_solutions]
-        return database_solutions
+        return [int(i) for i in database_solutions]
     return
 
 
