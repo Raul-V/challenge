@@ -3,6 +3,8 @@ services:
   postgres:    
     restart: always    
     image: postgres:10
+    volumes:      
+      - ./postgres-data/postgres:/var/lib/postgresql/data
     environment:      
       - POSTGRES_USER=rvivanco
       - POSTGRES_PASSWORD=pass1234
