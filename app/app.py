@@ -1,7 +1,7 @@
 from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 import os
-
+from models.solution import Solution
 app = Flask(__name__)
 
 def get_env_variable(name):
@@ -19,6 +19,8 @@ def create_database_tables():
 @app.route('/queens', methods = ['GET'])
 def get_n_queens_solutions():
     queens_quantity = int(request.args.get('n', 8))
+    solution = Solution(4, '[1,2,3,4]')
+    solution.save()
     return f'how many queens? {queens_quantity}'
 
 
