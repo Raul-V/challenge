@@ -1,7 +1,9 @@
 from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
-import os
+from sqlalchemy_utils import create_database
 from models.solution import Solution
+import os
+
 app = Flask(__name__)
 
 def get_env_variable(name):
