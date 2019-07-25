@@ -22,7 +22,7 @@ if __name__ == '__main__':
     from db import db
     from config import config
     db.init_app(app)
-    app.config['SQLALCHEMY_DATABASE_URI'] = config.DB_URI
+    app.config['SQLALCHEMY_DATABASE_URI'] = config.['DB_URI']
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['PROPAGATE_EXCEPTIONS'] = True
     app.run(host='0.0.0.0', debug=False)
