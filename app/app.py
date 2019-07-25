@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_utils import create_database
 from models.solution import Solution
@@ -19,7 +19,8 @@ def get_n_queens_solutions():
     if database_solutions:
         return database_solutions
     queens_solver = BacktrackingNQueensSolver(queens_quantity)
-    return queens_solver.find_all_solutions()
+    
+    return jsonify(queens_solver.find_all_solutions()), 200
 
 if __name__ == '__main__':
     from db import db
