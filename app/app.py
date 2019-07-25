@@ -18,7 +18,7 @@ def get_n_queens_solutions():
     database_solutions = Solution.find_by_n(queens_quantity)
 
     if database_solutions:
-        database_solutions = [int(r) for r in [s.solution.split(',') for s in database_solutions] ]
+        database_solutions = [s.solution.split(',') for s in database_solutions]
         return jsonify(database_solutions), 200
 
     queens_solver = BacktrackingNQueensSolver(queens_quantity)
