@@ -1,7 +1,6 @@
-FROM alpine:latest
+FROM python:3.6-alpine
 
-RUN apk add --no-cache python3-dev \
-    && pip3 install --upgrade pip && pip3 install psycopg2
+RUN apk update && apk add postgresql-dev gcc python3-dev musl-dev  
 
 WORKDIR /app
 
